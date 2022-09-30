@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Vector2 spawnZone;
     [SerializeField] private int numberToSpawn;
     [SerializeField] private GameObject enemyToSpawn;
+    [SerializeField] private WallController wall;
     
     private void OnEnable()
     {
@@ -28,12 +29,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies()
     {
-        float yTransform = transform.position.y;
-        float spawnX = spawnZone.x / 2;
-        float spawnY = spawnZone.y;
-        for (int i = 0; i < numberToSpawn; i++)
+        var yTransform = transform.position.y;
+        var spawnX = spawnZone.x / 2;
+        var spawnY = spawnZone.y;
+        for (var i = 0; i < numberToSpawn; i++)
         {
-            Instantiate(enemyToSpawn, new Vector3(Random.Range(spawnX * -1, spawnX), Random.Range((spawnY * -1) + yTransform, spawnY + yTransform), 0), Quaternion.identity, transform);
+            var spawned = Instantiate(enemyToSpawn, new Vector3(Random.Range(spawnX * -1, spawnX), Random.Range((spawnY * -1) + yTransform, spawnY + yTransform), 0), Quaternion.identity, transform).GetComponent<EnemyController>();
+            spawned.SetTarget(wall.targets[Random.Range(0, wall.targets.Count)]);
         }
     }
 
