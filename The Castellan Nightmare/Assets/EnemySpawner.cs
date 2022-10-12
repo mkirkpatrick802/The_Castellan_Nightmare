@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
         for (var i = 0; i < numberToSpawn; i++)
         {
             var spawned = Instantiate(enemyToSpawn, new Vector3(Random.Range(spawnX * -1, spawnX), Random.Range((spawnY * -1) + yTransform, spawnY + yTransform), 0), Quaternion.identity, transform).GetComponent<EnemyController>();
-            spawned.SetTarget(wall.targets[Random.Range(0, wall.targets.Count)]);
+            spawned.SetTarget(wall.targets);
         }
     }
 

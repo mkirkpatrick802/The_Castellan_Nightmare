@@ -10,11 +10,9 @@ public static class CoinsManager
         get => _coins;
         set
         {
-            if(_coins == value)
-                return;
+            if(_coins == value) return;
             _coins = value;
             coinsChanged?.Invoke(_coins);
         }
     }
-
 }

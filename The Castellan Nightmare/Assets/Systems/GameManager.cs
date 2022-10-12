@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     public static event Action<GameState> gameStateChanged;
     public GameState currentGameState;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Start()
@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.SpawnEnemies:
                 break;
+            case GameState.EnemiesActive:
+                break;
             case GameState.EndGame:
                 break;
             default:
@@ -46,5 +48,6 @@ public enum GameState
     LoadGame,
     StartGame,
     SpawnEnemies,
+    EnemiesActive,
     EndGame
 }
