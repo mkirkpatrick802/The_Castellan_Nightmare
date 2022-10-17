@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
@@ -8,12 +9,18 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackTime;
     private AIDestinationSetter _setter;
+    private EnemySpawner _spawner;
     
     private void Awake()
     {
         _setter = GetComponent<AIDestinationSetter>();
     }
 
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        _spawner = spawner;
+    }
+    
     public void SetTarget(List<Transform> newTarget)
     {
         Transform closestTarget = null;
@@ -49,5 +56,11 @@ public class EnemyController : MonoBehaviour
         }
         
         // ReSharper disable once IteratorNeverReturns
+    }
+
+    private void OnDestroy()
+    {
+        if(_spawner)
+            _spawner.EnemyDestroyed(transform);
     }
 }

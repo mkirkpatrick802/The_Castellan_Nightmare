@@ -11,6 +11,12 @@ public class WallController : MonoBehaviour
     {
         WallHealth.Health = startingHealth;
     }
+
+    private void Update()
+    {
+        if(WallHealth.Health <= 0)
+            GameManager.Instance.UpdateGameState(GameState.EndGame);
+    }
 }
 
 public static class WallHealth
