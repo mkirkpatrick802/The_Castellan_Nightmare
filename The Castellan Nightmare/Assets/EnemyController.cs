@@ -61,6 +61,6 @@ public class EnemyController : MonoBehaviour
     private void OnDestroy()
     {
         if(_spawner)
-            _spawner.EnemyDestroyed(transform);
+            _spawner.EnemyDestroyed(this);
     }
 }

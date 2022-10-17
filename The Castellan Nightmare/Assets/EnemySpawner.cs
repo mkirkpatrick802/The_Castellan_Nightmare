@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int numberToSpawn;
     [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private WallController wall;
-    private List<Transform> _enemiesSpawned = new List<Transform>();
+    private List<EnemyController> _enemiesSpawned = new List<EnemyController>();
     private GameManager _manager;
 
     private void Awake()
@@ -42,23 +42,40 @@ public class EnemySpawner : MonoBehaviour
     
     private void SpawnEnemies()
     {
-        var yTransform = transform.position.y;
-        var spawnX = spawnZone.x / 2;
-        var spawnY = spawnZone.y;
-        for (var i = 0; i < numberToSpawn; i++)
+        float yTransform = transform.position.y;
+        float spawnX = spawnZone.x / 2;
+        float spawnY = spawnZone.y;
+        for (int i = 0; i < numberToSpawn; i++)
         {
-            var spawned = Instantiate(enemyToSpawn, new Vector3(Random.Range(spawnX * -1, spawnX), Random.Range((spawnY * -1) + yTransform, spawnY + yTransform), 0), Quaternion.identity, transform).GetComponent<EnemyController>();
+            EnemyController spawned = Instantiate(enemyToSpawn, new Vector3(Random.Range(spawnX * -1, spawnX), Random.Range((spawnY * -1) + yTransform, spawnY + yTransform), 0), Quaternion.identity, transform).GetComponent<EnemyController>();
             spawned.SetTarget(wall.targets);
             spawned.SetSpawner(this);
-            _enemiesSpawned.Add(spawned.transform);
+            _enemiesSpawned.Add(spawned);
         }
         
         _manager.UpdateGameState(GameState.EnemiesActive);
     }
 
-    public void EnemyDestroyed(Transform destroyed)
+    public void EnemyDestroyed(EnemyController destroyed)
     {
         _enemiesSpawned.Remove(destroyed);
+    }
+
+    public Transform FindClosestEnemy(Vector2 pos)
+    {
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+        foreach (EnemyController enemy in _enemiesSpawned)
+        {
+            float dist = Vector2.Distance(enemy.transform.position, pos);
+            if (dist < minDistance)
+            {
+                closest = enemy.transform;
+                minDistance = dist;
+            }
+        }
+
+        return closest;
     }
     
     private void OnDrawGizmos()
