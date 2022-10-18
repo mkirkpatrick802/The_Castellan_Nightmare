@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
 
         gameStateChanged?.Invoke(currentGameState);
+        if(currentGameState == GameState.SpawnEnemies)
+        {
+            UpdateGameState(GameState.EnemiesActive);
+        }
     }
 }
 

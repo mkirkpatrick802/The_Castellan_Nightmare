@@ -30,8 +30,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if(state != GameState.SpawnEnemies) return;
         SpawnEnemies();
-        print("All Spawned");
-        //_manager.UpdateGameState(GameState.EnemiesActive);
     }
 
     private void SpawnEnemies()
