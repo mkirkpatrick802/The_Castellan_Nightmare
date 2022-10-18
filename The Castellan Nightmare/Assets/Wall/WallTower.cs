@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WallTower : MonoBehaviour
@@ -9,7 +6,7 @@ public class WallTower : MonoBehaviour
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float fireRate;
-    //[SerializeField] private int damage;
+    private Coroutine _lastCoroutine = null;
 
     private void OnEnable()
     {
@@ -20,13 +17,21 @@ public class WallTower : MonoBehaviour
     {
         GameManager.gameStateChanged -= GameStateChanged;
     }
-    
+
     private void GameStateChanged(GameState state)
     {
+        print(state);
         if (state == GameState.EnemiesActive)
-            StartCoroutine(Firing());
-        else 
-            StopCoroutine(Firing());
+        {
+            print("Start Firing");
+            _lastCoroutine = StartCoroutine(Firing());
+        }
+        else
+        {
+            if (_lastCoroutine == null) return;
+            print("Stop Firing");
+            StopCoroutine(_lastCoroutine);
+        }
     }
 
     private IEnumerator Firing()
@@ -34,16 +39,21 @@ public class WallTower : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
-            Fire();   
+            Fire();
         }
     }
 
     private void Fire()
     {
         Transform closestEnemy = spawner.FindClosestEnemy(transform.position);
-        
         Transform t = transform;
-        TowerProjectile spawnedProjectile = Instantiate(projectile, t.position, Quaternion.identity, t).GetComponent<TowerProjectile>();
-        spawnedProjectile.Spawned(closestEnemy);
+        Vector3 tPos = t.position;
+        Vector2 direction = closestEnemy.position - tPos;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        TowerProjectile spawnedProjectile = Instantiate(projectile, tPos, Quaternion.AngleAxis(angle - 90, Vector3.forward)).GetComponent<TowerProjectile>();
+        spawnedProjectile.Spawned();
     }
 }
+

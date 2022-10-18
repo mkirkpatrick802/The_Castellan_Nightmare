@@ -26,20 +26,14 @@ public class EnemySpawner : MonoBehaviour
         GameManager.gameStateChanged -= GameStateChanged;
     }
 
-    private void Update()
-    {
-        if (_enemiesSpawned.Count == 0)
-        {
-            _manager.UpdateGameState(GameState.SpawnEnemies);
-        }
-    }
-
-    private void GameStateChanged(GameState state)
+    private void GameStateChanged(GameState state) 
     {
         if(state != GameState.SpawnEnemies) return;
         SpawnEnemies();
+        print("All Spawned");
+        //_manager.UpdateGameState(GameState.EnemiesActive);
     }
-    
+
     private void SpawnEnemies()
     {
         float yTransform = transform.position.y;
@@ -52,13 +46,14 @@ public class EnemySpawner : MonoBehaviour
             spawned.SetSpawner(this);
             _enemiesSpawned.Add(spawned);
         }
-        
-        _manager.UpdateGameState(GameState.EnemiesActive);
     }
 
     public void EnemyDestroyed(EnemyController destroyed)
     {
         _enemiesSpawned.Remove(destroyed);
+        
+        if(_enemiesSpawned.Count == 0)
+            _manager.UpdateGameState(GameState.SpawnEnemies);
     }
 
     public Transform FindClosestEnemy(Vector2 pos)

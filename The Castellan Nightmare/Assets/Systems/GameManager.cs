@@ -13,34 +13,15 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        UpdateGameState(GameState.StartGame);
+    { 
+        UpdateGameState(GameState.SpawnEnemies);
     }
 
     public void UpdateGameState(GameState newState)
     {
         currentGameState = newState;
+
         gameStateChanged?.Invoke(currentGameState);
-        
-        switch (currentGameState)
-        {
-            case GameState.Menu:
-                break;
-            case GameState.LoadGame:
-                break;
-            case GameState.StartGame:
-                UpdateGameState(GameState.SpawnEnemies);
-                break;
-            case GameState.SpawnEnemies:
-                break;
-            case GameState.EnemiesActive:
-                break;
-            case GameState.EndGame:
-                print("Game Lost");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
     }
 }
 

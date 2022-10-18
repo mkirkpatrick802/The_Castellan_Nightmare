@@ -8,8 +8,10 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private float attackTime;
+    [SerializeField] private int health;
     private AIDestinationSetter _setter;
     private EnemySpawner _spawner;
+    private bool _quitting;
     
     private void Awake()
     {
@@ -39,6 +41,12 @@ public class EnemyController : MonoBehaviour
         _setter.target = closestTarget;
     }
 
+    public void TakeDamage(int takeDamage)
+    {
+        health -= damage;
+        if(health <= 0) Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Wall")) return;
@@ -52,14 +60,20 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(attackTime);
             WallHealth.Health -= damage;
-            print("Wall Health is Currently: " + WallHealth.Health);
+            //print("Wall Health is Currently: " + WallHealth.Health);
         }
         
         // ReSharper disable once IteratorNeverReturns
     }
 
+    private void OnApplicationQuit()
+    {
+        _quitting = true;
+    }
+
     private void OnDestroy()
     {
+        if (_quitting) return;
         if(_spawner)
             _spawner.EnemyDestroyed(this);
     }
