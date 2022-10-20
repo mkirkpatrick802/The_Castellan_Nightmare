@@ -20,16 +20,16 @@ public class WallTower : MonoBehaviour
 
     private void GameStateChanged(GameState state)
     {
-        print(state);
+        //print(state);
         if (state == GameState.EnemiesActive)
         {
-            print("Start Firing");
+            //print("Start Firing");
             _lastCoroutine = StartCoroutine(Firing());
         }
         else
         {
             if (_lastCoroutine == null) return;
-            print("Stop Firing");
+            //print("Stop Firing");
             StopCoroutine(_lastCoroutine);
         }
     }
