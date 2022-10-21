@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public abstract class UpgradeStation : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
+    [Header("Interactable Settings")]
     [SerializeField] private float interactionRadius;
     private CircleCollider2D _col;
 
@@ -16,21 +16,25 @@ public abstract class UpgradeStation : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.playerInteract += InteractCheck;
+        PlayerInput.playerMoving += Cancel;
     }
 
     private void OnDisable()
     {
         PlayerInput.playerInteract -= InteractCheck;
+        PlayerInput.playerMoving -= Cancel;
     }
     
     private void InteractCheck(Vector2 playerPos)
     {
         if(!_col.OverlapPoint(playerPos)) return;
-        if(CoinsManager.Coins < 1) return;
         Interact();
     }
+
+    protected virtual void Cancel() { } // Only Tasks are cancelable so im not making it a pure virtual
     
     protected abstract void Interact();
+
 
     private void OnDrawGizmos()
     {

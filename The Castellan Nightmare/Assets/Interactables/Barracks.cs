@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barracks : UpgradeStation
+public class Barracks : Interactable
 {
     protected override void Interact()
     {
