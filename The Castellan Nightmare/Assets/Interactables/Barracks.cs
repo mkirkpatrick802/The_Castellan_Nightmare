@@ -6,7 +6,7 @@ public class Barracks : Interactable
 {
     protected override void Interact()
     {
-        CoinsManager.Coins--;
+        Coins.coins--;
         print("Solder's Hired");
     }
 }

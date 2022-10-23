@@ -1,26 +1,29 @@
 using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
+public abstract class Interactable : Upgrade
 {
     [Header("Interactable Settings")]
     [SerializeField] private float interactionRadius;
     private CircleCollider2D _col;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _col = gameObject.AddComponent<CircleCollider2D>();
         _col.radius = interactionRadius;
         _col.isTrigger = true;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base .OnEnable();
         PlayerInput.playerInteract += InteractCheck;
         PlayerInput.playerMoving += Cancel;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         PlayerInput.playerInteract -= InteractCheck;
         PlayerInput.playerMoving -= Cancel;
     }
@@ -31,13 +34,14 @@ public abstract class Interactable : MonoBehaviour
         Interact();
     }
 
-    protected virtual void Cancel() { } // Only Tasks are cancelable so im not making it a pure virtual
-    
-    protected abstract void Interact();
+    protected virtual void Cancel() { }
+
+    protected virtual void Interact() { }
 
 
-    private void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(this.transform.position, interactionRadius);
     }

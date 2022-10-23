@@ -1,20 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class WallTower : MonoBehaviour
+public class WallTower : Upgrade
 {
+    [Header("Tower Settings")]
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float fireRate;
     private Coroutine _lastCoroutine = null;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         GameManager.gameStateChanged += GameStateChanged;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         GameManager.gameStateChanged -= GameStateChanged;
     }
 
@@ -54,6 +57,12 @@ public class WallTower : MonoBehaviour
 
         TowerProjectile spawnedProjectile = Instantiate(projectile, tPos, Quaternion.AngleAxis(angle - 90, Vector3.forward)).GetComponent<TowerProjectile>();
         spawnedProjectile.Spawned();
+    }
+
+    protected override void UpgradeSystem()
+    {
+        if (Coins.coins < upgradeCost) return;
+        base.UpgradeSystem();
     }
 }
 

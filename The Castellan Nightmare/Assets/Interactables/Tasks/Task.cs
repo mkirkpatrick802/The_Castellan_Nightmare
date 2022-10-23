@@ -30,7 +30,7 @@ public class Task : Interactable
         while(true)
         {
             yield return new WaitForSeconds(taskTTC);
-            CoinsManager.Coins += taskReward;
+            Coins.coins += taskReward;
 
             if (taskCooldown == 0) continue;
             StartCoroutine(Cooldown());
