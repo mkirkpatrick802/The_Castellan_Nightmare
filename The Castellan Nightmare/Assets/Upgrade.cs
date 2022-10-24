@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Upgrade : MonoBehaviour
+public abstract class Upgrade : MonoBehaviour
 {
     [Header("Upgrade Settings")]
     [SerializeField] private CircleCollider2D upgradeCollider;
     [SerializeField] private float upgradeRadius;
     [SerializeField] protected int upgradeCost;
-    protected int level;
+    [SerializeField] protected float levelScaling;
+    protected int level = 1;
 
     protected virtual void Awake()
     {
@@ -39,6 +40,8 @@ public class Upgrade : MonoBehaviour
         level++;
         Coins.coins -= upgradeCost;
     }
+
+    protected abstract float Scaler(float value);
 
     protected virtual void OnDrawGizmos()
     {

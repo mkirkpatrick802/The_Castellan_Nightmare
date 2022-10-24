@@ -14,8 +14,8 @@ public class WallController : MonoBehaviour
 
     private void Update()
     {
-        if(WallHealth.Health <= 0)
-            GameManager.Instance.UpdateGameState(GameState.EndGame);
+/*        if(WallHealth.Health <= 0)
+            GameManager.Instance.UpdateGameState(GameState.EndGame);*/
     }
 }
 

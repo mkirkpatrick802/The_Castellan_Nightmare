@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         _setter.target = closestTarget;
     }
 
-    public void TakeDamage(int takeDamage)
+    public void TakeDamage(float takeDamage)
     {
         health -= damage;
         if(health <= 0) Destroy(gameObject);

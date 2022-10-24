@@ -6,7 +6,11 @@ public class WallTower : Upgrade
     [Header("Tower Settings")]
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private GameObject projectile;
+
+    [Header("Projectile Settings")]
     [SerializeField] private float fireRate;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float damage;
     private Coroutine _lastCoroutine = null;
 
     protected override void OnEnable()
@@ -23,16 +27,13 @@ public class WallTower : Upgrade
 
     private void GameStateChanged(GameState state)
     {
-        //print(state);
         if (state == GameState.EnemiesActive)
         {
-            //print("Start Firing");
             _lastCoroutine = StartCoroutine(Firing());
         }
         else
         {
             if (_lastCoroutine == null) return;
-            //print("Stop Firing");
             StopCoroutine(_lastCoroutine);
         }
     }
@@ -56,13 +57,22 @@ public class WallTower : Upgrade
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         TowerProjectile spawnedProjectile = Instantiate(projectile, tPos, Quaternion.AngleAxis(angle - 90, Vector3.forward)).GetComponent<TowerProjectile>();
-        spawnedProjectile.Spawned();
+        spawnedProjectile.Spawned(damage, projectileSpeed);
     }
 
     protected override void UpgradeSystem()
     {
         if (Coins.coins < upgradeCost) return;
         base.UpgradeSystem();
+        damage += Scaler(damage);
+        projectileSpeed += Scaler(projectileSpeed);
+        fireRate -= Scaler(fireRate);
+        print(level + " " + damage + " " + projectileSpeed + " " + fireRate);
+    }
+
+    protected override float Scaler(float value)
+    {
+        return value * Mathf.Pow(levelScaling, level);
     }
 }
 

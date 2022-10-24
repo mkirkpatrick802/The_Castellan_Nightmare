@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TowerProjectile : MonoBehaviour
 {
-    [SerializeField] private int damage;
-    [SerializeField] private float projectileSpeed;
     [SerializeField] private float aliveTime;
+    private float damage;
+    private float projectileSpeed;
     private Rigidbody2D _rb;
 
     private void Awake()
@@ -13,8 +13,10 @@ public class TowerProjectile : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Spawned()
+    public void Spawned(float damage, float projectileSpeed)
     {
+        this.damage = damage;
+        this.projectileSpeed = projectileSpeed;
         _rb.velocity = transform.up * projectileSpeed;
         StartCoroutine(DeathTimer());
     }
