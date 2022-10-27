@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,7 @@ using UnityEngine;
 public abstract class Upgrade : MonoBehaviour
 {
     [Header("Upgrade Settings")]
-    [SerializeField] private CircleCollider2D upgradeCollider;
-    [SerializeField] private float upgradeRadius;
+    [SerializeField] private Collider2D upgradeCollider;
     [SerializeField] protected int upgradeCost;
     [SerializeField] protected float levelScaling;
     protected int level = 1;
@@ -14,7 +14,6 @@ public abstract class Upgrade : MonoBehaviour
     protected virtual void Awake()
     {
         if (!upgradeCollider) return;
-        upgradeCollider.radius = upgradeRadius;
         upgradeCollider.isTrigger = true;
     }
 
@@ -42,11 +41,4 @@ public abstract class Upgrade : MonoBehaviour
     }
 
     protected abstract float Scaler(float value);
-
-    protected virtual void OnDrawGizmos()
-    {
-        if (!upgradeCollider) return;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(upgradeCollider.transform.position, upgradeRadius);
-    }
 }

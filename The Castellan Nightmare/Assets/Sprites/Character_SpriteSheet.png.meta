@@ -104,95 +104,95 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arrow
+      name: Character_SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 5
-        y: 83
+        y: 147
         width: 5
         height: 11
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2b6b31fbb996914292bcac598f54566
-      internalID: -1676158148
+      spriteID: 7230ebec17753ec41b0e114e8aa79360
+      internalID: 968490175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy
+      name: Character_SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 18
-        y: 82
+        y: 146
         width: 12
         height: 14
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c35918bd575b98e4e826d6e97b475a62
-      internalID: 1462922776
+      spriteID: d3c1464cd3213f14ab5c55c0de5ec49a
+      internalID: 343567867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player
+      name: Character_SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 35
-        y: 76
+        y: 140
         width: 10
         height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82806a144fb5f464682b98320f384d53
-      internalID: -1307248590
+      spriteID: f01f7ea059ea9e645846e9cca7ebc2de
+      internalID: 1347218533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTest
+      name: Character_SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 50
-        y: 80
+        y: 144
         width: 12
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 175e9ad42edd32544a6cf74c9cf31d7d
-      internalID: 1902646082
+      spriteID: 008796461ccedb645a8537e2a495eb2f
+      internalID: -2131588222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CoinCart
+      name: Character_SpriteSheet_4
       rect:
         serializedVersion: 2
         x: 67
-        y: 83
+        y: 147
         width: 10
         height: 10
       alignment: 0
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0af533535c8a1f148a939cacbecdac27
-      internalID: -1548134498
+      spriteID: fad9793ede9963f47adba9c4b6daa6d7
+      internalID: 948255158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeSign
+      name: Character_SpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 81
-        y: 80
-        width: 14
-        height: 15
+        x: 49
+        y: 112
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,8 +223,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3f58443bfb106f42a5372378ec09435
-      internalID: 526029879
+      spriteID: 340c4c52cfa0474439427c0e26fc178a
+      internalID: 945659070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 922455ca07c8e84428b71a23c37672ed
+      internalID: -1359030021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 63
+        width: 50
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4166f8444f411d43ab225d9bea17ed8
+      internalID: -657556393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 30
+        width: 32
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb3167763693b84da9e503abb5a7b52
+      internalID: 1424358041
       vertices: []
       indices: 
       edges: []
@@ -240,12 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UpgradeSign: 526029879
-      Enemy: 1462922776
-      CoinCart: -1548134498
-      Arrow: -1676158148
-      Player: -1307248590
-      PlayerTest: 1902646082
+      Character_SpriteSheet_0: 968490175
+      Character_SpriteSheet_6: -1359030021
+      Character_SpriteSheet_4: 948255158
+      Character_SpriteSheet_8: 1424358041
+      Character_SpriteSheet_7: -657556393
+      Character_SpriteSheet_5: 945659070
+      Character_SpriteSheet_1: 343567867
+      Character_SpriteSheet_2: 1347218533
+      Character_SpriteSheet_3: -2131588222
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

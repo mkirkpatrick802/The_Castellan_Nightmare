@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Interactable : Upgrade
@@ -39,9 +40,8 @@ public abstract class Interactable : Upgrade
     protected virtual void Interact() { }
 
 
-    protected override void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
-        base.OnDrawGizmos();
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(this.transform.position, interactionRadius);
     }

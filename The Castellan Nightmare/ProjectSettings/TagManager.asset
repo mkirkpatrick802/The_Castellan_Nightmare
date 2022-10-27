@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Enemy
   - Coin Cart
+  - Interactable
+  - Upgradeable
   layers:
   - Default
   - TransparentFX
