@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 7475484587499137582}
   - component: {fileID: 7958452179330939378}
   - component: {fileID: 4531192471313803382}
-  - component: {fileID: 8721345986169388760}
   - component: {fileID: 5574906049938395346}
+  - component: {fileID: 8721345986169388760}
   - component: {fileID: 4740939268097620983}
   - component: {fileID: 6336019560105881795}
   m_Layer: 0
@@ -207,21 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &8721345986169388760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8417135273819891663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b1ded85a0618e4180a9f89669eeb69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  attackTime: 0.5
-  health: 3
 --- !u!114 &5574906049938395346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +234,21 @@ MonoBehaviour:
   wallAvoidFalloff: 1
   priority: 0.5
   debug: 0
+--- !u!114 &8721345986169388760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417135273819891663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b1ded85a0618e4180a9f89669eeb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  attackTime: 0.5
+  health: 3
 --- !u!60 &4740939268097620983
 PolygonCollider2D:
   m_ObjectHideFlags: 0

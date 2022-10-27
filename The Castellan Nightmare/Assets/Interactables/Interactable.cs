@@ -1,30 +1,27 @@
 using System;
 using UnityEngine;
 
-public abstract class Interactable : Upgrade
+public abstract class Interactable : MonoBehaviour
 {
     [Header("Interactable Settings")]
     [SerializeField] private float interactionRadius;
     private CircleCollider2D _col;
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
         _col = gameObject.AddComponent<CircleCollider2D>();
         _col.radius = interactionRadius;
         _col.isTrigger = true;
     }
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
-        base .OnEnable();
         PlayerInput.playerInteract += InteractCheck;
         PlayerInput.playerMoving += Cancel;
     }
 
-    protected override void OnDisable()
+    protected virtual void OnDisable()
     {
-        base.OnDisable();
         PlayerInput.playerInteract -= InteractCheck;
         PlayerInput.playerMoving -= Cancel;
     }

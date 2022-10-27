@@ -9,9 +9,4 @@ public class Barracks : Interactable
         Coins.coins--;
         print("Solder's Hired");
     }
-
-    protected override float Scaler(float value)
-    {
-        throw new System.NotImplementedException();
-    }
 }

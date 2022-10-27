@@ -49,7 +49,7 @@ public class Task : Interactable
     private void SpawnCoinCart()
     {
         CoinCart spawnedCart = Instantiate(cart.gameObject, cartSpawnLocation.position, Quaternion.identity, transform).GetComponent<CoinCart>();
-        spawnedCart.Spawned(treasury);
+        spawnedCart.Spawned(treasury, treasury.transform, false);
     }
 
     private IEnumerator Cooldown()
@@ -58,10 +58,5 @@ public class Task : Interactable
         _onCooldown = true;
         yield return new WaitForSeconds(taskCooldown);
         _onCooldown = false;
-    }
-
-    protected override float Scaler(float value)
-    {
-        throw new System.NotImplementedException();
     }
 }
