@@ -9,20 +9,27 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackTime;
     [SerializeField] private int health;
+    [SerializeField] private int maxSpeed;
     private AIDestinationSetter _setter;
+    private AIPath _path;
     private EnemySpawner _spawner;
     private bool _quitting;
     
+    public Vector2 Velocity { get => _path.velocity; private set { } }
+
     private void Awake()
     {
         _setter = GetComponent<AIDestinationSetter>();
+        _path = GetComponent<AIPath>();
+
+        _path.maxSpeed = maxSpeed;
     }
 
     public void SetSpawner(EnemySpawner spawner)
     {
         _spawner = spawner;
     }
-    
+
     public void SetTarget(List<Transform> newTarget)
     {
         Transform closestTarget = null;

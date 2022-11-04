@@ -49,14 +49,21 @@ public class WallTower : Upgrade
 
     private void Fire()
     {
-        Transform closestEnemy = spawner.FindClosestEnemy(transform.position);
+        EnemyController closestEnemy = spawner.FindClosestEnemy(transform.position);
         Transform t = transform;
-        Vector3 tPos = t.position;
-        Vector2 direction = closestEnemy.position - tPos;
+        Vector2 towerPosition = t.position;
+        Vector2 targetPosition = closestEnemy.transform.position;
+
+        float distanceToEnemy = Vector2.Distance(targetPosition, towerPosition);
+        float timeToHit = distanceToEnemy / projectileSpeed;
+        Vector2 targetVelocity = (closestEnemy.Velocity * timeToHit);
+        Vector2 finalPosition = targetPosition + targetVelocity;
+
+        Vector2 direction = finalPosition - towerPosition;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        TowerProjectile spawnedProjectile = Instantiate(projectile, tPos, Quaternion.AngleAxis(angle - 90, Vector3.forward)).GetComponent<TowerProjectile>();
+        TowerProjectile spawnedProjectile = Instantiate(projectile, towerPosition, Quaternion.AngleAxis(angle - 90, Vector3.forward)).GetComponent<TowerProjectile>();
         spawnedProjectile.Spawned(damage, projectileSpeed);
     }
 

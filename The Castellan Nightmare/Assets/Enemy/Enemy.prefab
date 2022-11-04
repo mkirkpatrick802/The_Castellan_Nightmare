@@ -249,6 +249,7 @@ MonoBehaviour:
   damage: 1
   attackTime: 0.5
   health: 3
+  maxSpeed: 2
 --- !u!60 &4740939268097620983
 PolygonCollider2D:
   m_ObjectHideFlags: 0

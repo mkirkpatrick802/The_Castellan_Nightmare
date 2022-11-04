@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
             _manager.UpdateGameState(GameState.SpawnEnemies);
     }
 
-    public Transform FindClosestEnemy(Vector2 pos)
+    public EnemyController FindClosestEnemy(Vector2 pos)
     {
         Transform closest = null;
         float minDistance = Mathf.Infinity;
@@ -68,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        return closest;
+        return closest.GetComponent<EnemyController>();
     }
     
     private void OnDrawGizmos()
