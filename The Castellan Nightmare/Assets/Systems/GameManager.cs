@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     { 
-        UpdateGameState(GameState.SpawnEnemies);
+        UpdateGameState(GameState.StartWave);
     }
 
     public void UpdateGameState(GameState newState)
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
 
         gameStateChanged?.Invoke(currentGameState);
-        if(currentGameState == GameState.SpawnEnemies)
+        if(currentGameState == GameState.StartWave)
         {
             UpdateGameState(GameState.EnemiesActive);
         }
@@ -34,7 +34,7 @@ public enum GameState
     Menu,
     LoadGame,
     StartGame,
-    SpawnEnemies,
+    StartWave,
     EnemiesActive,
     EndGame
 }

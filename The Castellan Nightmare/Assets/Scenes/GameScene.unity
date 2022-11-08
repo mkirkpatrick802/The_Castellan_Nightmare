@@ -4639,9 +4639,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718675478}
+  - component: {fileID: 718675481}
   - component: {fileID: 718675480}
   - component: {fileID: 718675479}
-  - component: {fileID: 718675481}
+  - component: {fileID: 718675482}
   m_Layer: 0
   m_Name: Barracks
   m_TagString: Interactable
@@ -4755,6 +4756,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &718675482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718675477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b48ad0a901fceb4fb6c9cca70697253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnZone: {x: 25, y: 2}
+  spawnZoneCenter: {x: 0, y: 8}
+  numberToSpawn: 3
+  toSpawn: {fileID: 193881290904362497, guid: 0ea55827a8bda374382aa7a9c991778a, type: 3}
 --- !u!1 &829758405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6432,7 +6449,7 @@ GameObject:
   - component: {fileID: 2085898150}
   - component: {fileID: 2085898151}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6466,8 +6483,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnZone: {x: 40, y: 4}
+  spawnZoneCenter: {x: 0, y: 20}
   numberToSpawn: 5
-  enemyToSpawn: {fileID: 8417135273819891663, guid: 9bd1f21c82571664eb7645e99c2c64cb, type: 3}
+  toSpawn: {fileID: 8417135273819891663, guid: 9bd1f21c82571664eb7645e99c2c64cb, type: 3}
   wall: {fileID: 516082562}
 --- !u!1 &2111980947 stripped
 GameObject:
