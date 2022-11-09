@@ -6,22 +6,29 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    //[SerializeField] private float 
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float rotationPower;
+    private Rigidbody2D _rb;
     private Coroutine _spinCoroutine;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     private void OnEnable()
     {
-        PlayerInput.playerInteract += PlayerInteract;
+        Interactable.playerInteracting += PlayerInteract;
         PlayerInput.playerMoving += PlayerMoving;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playerInteract -= PlayerInteract;
+        Interactable.playerInteracting -= PlayerInteract;
         PlayerInput.playerMoving -= PlayerMoving;
     }
 
-    private void PlayerInteract(Vector2 vector2)
+    private void PlayerInteract()
     {
         AnimatePlayer(PlayerAnimationStates.Interact);
     }
@@ -36,10 +43,13 @@ public class PlayerAnimation : MonoBehaviour
         switch (state)
         {
             case PlayerAnimationStates.Interact:
+                if (_spinCoroutine != null) return;
                 _spinCoroutine = StartCoroutine(Spin());
                 break;
             case PlayerAnimationStates.Moving:
+                if (_spinCoroutine == null) return;
                 StopCoroutine(_spinCoroutine);
+                _spinCoroutine = null;
                 break;
         }
     }
@@ -48,7 +58,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         while(true)
         {
-            //transform.Rotate();
+            var impulse = (rotationPower * Mathf.Deg2Rad) * _rb.inertia;
+            _rb.AddTorque(impulse, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(rotationSpeed);
         }
     }
 }

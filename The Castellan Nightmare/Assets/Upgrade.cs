@@ -24,13 +24,13 @@ public abstract class Upgrade : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        PlayerInput.playerUpgrade += UpgradeCheck;
+        PlayerInput.playerUpgradeCheck += UpgradeCheck;
         Coins.coinsChanged += CoinsUpdated;
     }
 
     protected virtual void OnDisable()
     {
-        PlayerInput.playerUpgrade -= UpgradeCheck;
+        PlayerInput.playerUpgradeCheck -= UpgradeCheck;
         Coins.coinsChanged -= CoinsUpdated;
     }
 

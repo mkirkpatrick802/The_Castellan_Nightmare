@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class CoinCart : MonoBehaviour
 {
-    private Treasury _treasury;
+    [SerializeField] private float maxSpeed;
+    //private Treasury _treasury;
     private Transform _target;
     private AIDestinationSetter _setter;
+    private AIPath _ai;
     private bool _fromTreasury;
 
     public bool FromTreasury { get => _fromTreasury; }
@@ -16,12 +18,14 @@ public class CoinCart : MonoBehaviour
     private void Awake()
     {
         _setter = GetComponent<AIDestinationSetter>();
+        _ai = GetComponent<AIPath>();
+        _ai.maxSpeed = maxSpeed;
     }
 
     public void Spawned(Treasury treasury, Transform target, bool fromTreasury)
     {
         _fromTreasury = fromTreasury;
-        _treasury = treasury;
+        //_treasury = treasury;
         _target = target;
         _setter.target = target;
     }

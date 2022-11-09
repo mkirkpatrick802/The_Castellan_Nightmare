@@ -7,6 +7,8 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] private float interactionRadius;
     private CircleCollider2D _col;
 
+    public static event Action playerInteracting; 
+
     protected virtual void Awake()
     {
         _col = gameObject.AddComponent<CircleCollider2D>();
@@ -16,19 +18,20 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        PlayerInput.playerInteract += InteractCheck;
+        PlayerInput.playerInteractCheck += InteractCheck;
         PlayerInput.playerMoving += Cancel;
     }
 
     protected virtual void OnDisable()
     {
-        PlayerInput.playerInteract -= InteractCheck;
+        PlayerInput.playerInteractCheck -= InteractCheck;
         PlayerInput.playerMoving -= Cancel;
     }
     
     private void InteractCheck(Vector2 playerPos)
     {
         if(!_col.OverlapPoint(playerPos)) return;
+        playerInteracting?.Invoke();
         Interact();
     }
 

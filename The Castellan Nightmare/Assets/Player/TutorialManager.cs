@@ -10,14 +10,14 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.playerInteract += PlayerInteract;
-        PlayerInput.playerUpgrade += PlayerUpgrade;
+        PlayerInput.playerInteractCheck += PlayerInteract;
+        PlayerInput.playerUpgradeCheck += PlayerUpgrade;
     }
 
     private void OnDisable()
     {
-        PlayerInput.playerInteract -= PlayerInteract;
-        PlayerInput.playerUpgrade -= PlayerUpgrade;
+        PlayerInput.playerInteractCheck -= PlayerInteract;
+        PlayerInput.playerUpgradeCheck -= PlayerUpgrade;
     }
 
     private void PlayerInteract(Vector2 obj)

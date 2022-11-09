@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public static event Action<Vector2> playerInteract;
-    public static event Action<Vector2> playerUpgrade;
+    public static event Action<Vector2> playerInteractCheck;
+    public static event Action<Vector2> playerUpgradeCheck;
     public static event Action playerMoving;
     private Vector2 _movementDir;
     private PlayerController _controller;
@@ -18,8 +18,8 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         _movementDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetKeyDown(KeyCode.Space)) playerInteract?.Invoke(transform.position);        //Invoke an event if the player try's to interact.
-        if (Input.GetKeyDown(KeyCode.Mouse0)) playerUpgrade?.Invoke(transform.position);         //Invoke an event if the player try's to upgrade
+        if (Input.GetKeyDown(KeyCode.Space)) playerInteractCheck?.Invoke(transform.position);        //Invoke an event if the player try's to interact.
+        if (Input.GetKeyDown(KeyCode.Mouse0)) playerUpgradeCheck?.Invoke(transform.position);         //Invoke an event if the player try's to upgrade
 
         //TODO: Find a way to do this only if the player is in progress of doing a task
         if (math.any(_movementDir)) playerMoving?.Invoke();                                     //Invoke an event if the player is moving
