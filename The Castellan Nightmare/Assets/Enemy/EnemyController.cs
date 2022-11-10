@@ -14,8 +14,11 @@ public class EnemyController : MonoBehaviour
     private AIPath _path;
     private EnemySpawner _spawner;
     private bool _quitting;
+    private bool _isInCombat = false;
     
     public Vector2 Velocity { get => _path.velocity; private set { } }
+
+    public bool IsInCombat { get => _isInCombat; private set { } }
 
     private void Awake()
     {
@@ -30,11 +33,12 @@ public class EnemyController : MonoBehaviour
         _spawner = spawner;
     }
 
-    public void SetTarget(List<Transform> newTarget)
+    public void SetTarget(List<Transform> wallTargets)
     {
         Transform closestTarget = null;
         float smallestDistance = 0;
-        foreach (var target in newTarget)
+
+        foreach (Transform target in wallTargets)
         {
             var testDistance = Vector2.Distance(transform.position, target.position);
             if (!closestTarget) {closestTarget = target; smallestDistance = testDistance;}
@@ -46,6 +50,14 @@ public class EnemyController : MonoBehaviour
         
         if(!closestTarget) print("Target Null");
         _setter.target = closestTarget;
+
+
+    }
+
+    public void AttackAlly(Transform ally)
+    {
+        _isInCombat = true;
+        _setter.target = ally;
     }
 
     public void TakeDamage(float takeDamage)

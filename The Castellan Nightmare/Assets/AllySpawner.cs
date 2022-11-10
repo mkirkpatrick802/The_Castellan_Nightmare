@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AllySpawner : Spawner
 {
+    public List<Transform> allies { get => _spawned; private set { } }
+
     protected override void Spawn()
     {
         float yTransform = spawnZoneCenter.y;

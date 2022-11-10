@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : Spawner
-{ 
+{
+    public static event Action<List<Transform>> allEnemiesSpawned;
+    public static event Action<EnemyData> enemyKilled;
+
     [SerializeField] private WallController wall;
     private GameManager _manager;
 
@@ -24,13 +28,19 @@ public class EnemySpawner : Spawner
             spawned.SetSpawner(this);
             _spawned.Add(spawned.transform);
         }
+
+        allEnemiesSpawned?.Invoke(_spawned);
+        _manager.UpdateGameState(GameState.EnemiesActive);
     }
 
     public void EnemyDestroyed(EnemyController destroyed)
     {
-        _spawned.Remove(destroyed.transform);
-        
-        if(_spawned.Count == 0)
+        Transform transform = destroyed.transform;
+        _spawned.Remove(transform);
+        EnemyData data = new EnemyData(transform, _spawned);
+        enemyKilled?.Invoke(data);
+
+        if (_spawned.Count == 0)
             _manager.UpdateGameState(GameState.StartWave);
     }
 
@@ -51,4 +61,16 @@ public class EnemySpawner : Spawner
 
         return closest.GetComponent<EnemyController>();
     }
+}
+
+public struct EnemyData
+{
+    public EnemyData(Transform killed, List<Transform> list)
+    {
+        killedEnemy = killed;
+        newEnemyList = list;
+    }
+
+    public Transform killedEnemy;
+    public List<Transform> newEnemyList;
 }

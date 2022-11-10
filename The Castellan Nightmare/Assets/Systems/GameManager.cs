@@ -22,10 +22,6 @@ public class GameManager : MonoBehaviour
         currentGameState = newState;
 
         gameStateChanged?.Invoke(currentGameState);
-        if(currentGameState == GameState.StartWave)
-        {
-            UpdateGameState(GameState.EnemiesActive);
-        }
     }
 }
 
