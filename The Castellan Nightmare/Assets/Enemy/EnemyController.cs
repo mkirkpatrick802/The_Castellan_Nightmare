@@ -9,9 +9,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackTime;
     [SerializeField] private int health;
-    [SerializeField] private int maxSpeed;
     private AIDestinationSetter _setter;
-    private AIPath _path;
+    private EnemyPathAI _path;
     private EnemySpawner _spawner;
     private bool _quitting;
     private bool _isInCombat = false;
@@ -22,10 +21,8 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        _path = GetComponent<EnemyPathAI>();
         _setter = GetComponent<AIDestinationSetter>();
-        _path = GetComponent<AIPath>();
-
-        _path.maxSpeed = maxSpeed;
     }
 
     public void SetSpawner(EnemySpawner spawner)
@@ -50,8 +47,6 @@ public class EnemyController : MonoBehaviour
         
         if(!closestTarget) print("Target Null");
         _setter.target = closestTarget;
-
-
     }
 
     public void AttackAlly(Transform ally)
@@ -66,17 +61,18 @@ public class EnemyController : MonoBehaviour
         if(health <= 0) Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void TargetReached()
     {
-        if (!col.CompareTag("Wall")) return;
-        
-        StartCoroutine(Attack());
+        //print(gameObject.name + " Attacking " + _setter.target + "!!!");
+        _isInCombat = true;
+        StartCoroutine(Attack(_setter.target));
     }
 
-    private IEnumerator Attack()
+    private IEnumerator Attack(Transform target)
     {
         while (true)
         {
+            if (!target.CompareTag("Wall")) yield return null;
             yield return new WaitForSeconds(attackTime);
             WallHealth.Health -= damage;
             //print("Wall Health is Currently: " + WallHealth.Health);

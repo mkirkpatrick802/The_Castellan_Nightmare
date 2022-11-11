@@ -1,13 +1,17 @@
-using System;
-using System.Collections;
+using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class AllyController : MonoBehaviour
 {
     private Transform _target;
+    private AIDestinationSetter _setter;
+
+
+    private void Awake()
+    {
+        _setter = GetComponent<AIDestinationSetter>();
+    }
 
     private void OnEnable()
     {
@@ -41,12 +45,13 @@ public class AllyController : MonoBehaviour
 
         if (!closestEnemy) return;
         _target = closestEnemy;
-        closestEnemy.GetComponent<EnemyController>().AttackAlly(transform);
+        _setter.target = _target;
+        _target.GetComponent<EnemyController>().AttackAlly(transform);
     }
 
     private void EnemyKilled(EnemyData data)
     {
-        if(_target != data.killedEnemy) return;
+        if (_target != data.killedEnemy) return;
 
         _target = null;
         StartCombat(data.newEnemyList);
