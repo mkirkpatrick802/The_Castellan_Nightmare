@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackHandler : MonoBehaviour
 {
-    private EnemyAnimationController _controller;
+    private AnimationBase _animation;
     private LayerMask _mask;
     private Transform _target;
     private float _attackRadius;
@@ -12,18 +12,18 @@ public class EnemyAttackHandler : MonoBehaviour
 
     private void Awake()
     {
-        _controller = GetComponent<EnemyAnimationController>();
+        _animation = GetComponent<AnimationBase>();
     }
 
     public void EngageCombat(Transform target, LayerMask attackableLayer, float attackRadius, int damage)
     {
-        if (_controller.CurrentAnimation == EnemyAnimations.Attack) return;
 
         _mask = attackableLayer;
         _damage = damage;
         _target = target;
         _attackRadius = attackRadius;
-        _controller.PlayAnimation(EnemyAnimations.Attack);
+
+        _animation.ChangeAnimationState(AnimationStates.Attack);
     }
 
     public void AttackHit()
