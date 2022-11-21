@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Attack Settings")]
+    [SerializeField] private LayerMask attackableLayers;
+    [SerializeField] private float attackRadius;
     [SerializeField] private int damage;
-    [SerializeField] private float attackTime;
     [SerializeField] private int health;
+
     private AIDestinationSetter _setter;
     private EnemyPathAI _path;
     private EnemySpawner _spawner;
+    private EnemyAttackHandler _attackHandler;
     private bool _quitting;
     private bool _isInCombat = false;
     
@@ -23,6 +27,7 @@ public class EnemyController : MonoBehaviour
     {
         _path = GetComponent<EnemyPathAI>();
         _setter = GetComponent<AIDestinationSetter>();
+        _attackHandler = GetComponentInChildren<EnemyAttackHandler>();
     }
 
     public void SetSpawner(EnemySpawner spawner)
@@ -65,20 +70,7 @@ public class EnemyController : MonoBehaviour
     {
         //print(gameObject.name + " Attacking " + _setter.target + "!!!");
         _isInCombat = true;
-        StartCoroutine(Attack(_setter.target));
-    }
-
-    private IEnumerator Attack(Transform target)
-    {
-        while (true)
-        {
-            if (!target.CompareTag("Wall")) yield return null;
-            yield return new WaitForSeconds(attackTime);
-            WallHealth.Health -= damage;
-            //print("Wall Health is Currently: " + WallHealth.Health);
-        }
-        
-        // ReSharper disable once IteratorNeverReturns
+        _attackHandler.EngageCombat(_setter.target, attackableLayers, attackRadius, damage);
     }
 
     private void OnApplicationQuit()
