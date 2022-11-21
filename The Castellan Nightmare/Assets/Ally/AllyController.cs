@@ -6,6 +6,8 @@ public class AllyController : MonoBehaviour
 {
     private Transform _target;
     private AIDestinationSetter _setter;
+    private HealthHolder _healthHolder;
+    //private 
 
 
     private void Awake()
@@ -23,6 +25,13 @@ public class AllyController : MonoBehaviour
     {
         EnemySpawner.allEnemiesSpawned -= StartCombat;
         EnemySpawner.enemyKilled -= EnemyKilled;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Enemy")) return;
+
+
     }
 
     private void StartCombat(List<Transform> enemies)

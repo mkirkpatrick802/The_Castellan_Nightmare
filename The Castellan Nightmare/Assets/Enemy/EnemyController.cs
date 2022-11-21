@@ -6,16 +6,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Attack Settings")]
-    [SerializeField] private LayerMask attackableLayers;
-    [SerializeField] private float attackRadius;
-    [SerializeField] private int damage;
-    [SerializeField] private int health;
+    [SerializeField] private EnemyScriptableObject values;
 
     private AIDestinationSetter _setter;
     private EnemyPathAI _path;
     private EnemySpawner _spawner;
     private EnemyAttackHandler _attackHandler;
+    private HealthHolder _healthHolder;
     private bool _quitting;
     private bool _isInCombat = false;
     
@@ -28,6 +25,9 @@ public class EnemyController : MonoBehaviour
         _path = GetComponent<EnemyPathAI>();
         _setter = GetComponent<AIDestinationSetter>();
         _attackHandler = GetComponentInChildren<EnemyAttackHandler>();
+        _path.maxSpeed = values.maxSpeed;
+
+        _healthHolder = new HealthHolder(values.health);
     }
 
     public void SetSpawner(EnemySpawner spawner)
@@ -62,15 +62,17 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float takeDamage)
     {
-        health -= damage;
-        if(health <= 0) Destroy(gameObject);
+        _healthHolder.Health -= takeDamage;
+        if ( _healthHolder.Health <= 0) Destroy(gameObject);
     }
 
     public void TargetReached()
     {
         //print(gameObject.name + " Attacking " + _setter.target + "!!!");
         _isInCombat = true;
-        _attackHandler.EngageCombat(_setter.target, attackableLayers, attackRadius, damage);
+
+        //TODO: Make this function be called every x amount of time while this enemy is on its target
+        _attackHandler.EngageCombat(_setter.target);
     }
 
     private void OnApplicationQuit()

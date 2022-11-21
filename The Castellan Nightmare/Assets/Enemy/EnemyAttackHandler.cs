@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class EnemyAttackHandler : MonoBehaviour
 {
+    [SerializeField] private EnemyScriptableObject values;
+
     private AnimationBase _animation;
-    private LayerMask _mask;
     private Transform _target;
-    private float _attackRadius;
-    private int _damage;
 
     private void Awake()
     {
         _animation = GetComponent<AnimationBase>();
     }
 
-    public void EngageCombat(Transform target, LayerMask attackableLayer, float attackRadius, int damage)
+    public void EngageCombat(Transform target)
     {
-
-        _mask = attackableLayer;
-        _damage = damage;
         _target = target;
-        _attackRadius = attackRadius;
 
         _animation.ChangeAnimationState(AnimationStates.Attack);
     }
 
     public void AttackHit()
     {
-        if (!Physics2D.OverlapCircle(transform.position, _attackRadius, _mask)) return;
+        if (!Physics2D.OverlapCircle(transform.position, values.attackRadius, values.attackableLayers)) return;
         if (_target.CompareTag("Wall"))
         {
-            WallHealth.Health -= _damage;
+            WallHealth.Health -= values.damage;
             print("Wall Health is Currently: " + WallHealth.Health);
         }
         else if (_target.CompareTag("Ally"))
@@ -43,6 +38,6 @@ public class EnemyAttackHandler : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, _attackRadius);
+        Gizmos.DrawWireSphere(transform.position, values.attackRadius);
     }
 }

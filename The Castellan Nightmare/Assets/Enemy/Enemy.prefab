@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1adf04a0d8bdb46458f2a130dfb039a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  values: {fileID: 11400000, guid: bef3690506dbb4e42ad62fde65c2a7b6, type: 2}
 --- !u!114 &4874483835771934683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ MonoBehaviour:
   radius: 0.35
   height: 2
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 3
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -294,12 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b1ded85a0618e4180a9f89669eeb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackableLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  attackRadius: 0
-  damage: 1
-  health: 1000
+  values: {fileID: 11400000, guid: bef3690506dbb4e42ad62fde65c2a7b6, type: 2}
 --- !u!50 &6336019560105881795
 Rigidbody2D:
   serializedVersion: 4
